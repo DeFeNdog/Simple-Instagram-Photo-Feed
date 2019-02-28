@@ -1,0 +1,56 @@
+{% extends 'base.jinja2' %}
+{% block subtitle %}inFocus Instagram Service{% endblock subtitle %}
+
+{% block content %}
+
+    <div class="align text-center">
+        <div>
+            <div class="branding">
+                <picture>
+                    <source type="image/svg+xml" srcset="static/images/logo.svg">
+                    <img src="static/images/logo.png" alt="inFocus Advertising">
+                </picture>
+            </div>
+            <h1>Instagram Service</h1>
+        </div>
+    </div>
+
+    <style>
+    html,
+    body {
+        background-color: #000;
+    }
+    body {
+        background-image: url('static/images/background3.jpg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center center;
+        color: #fff !important;
+        font-size: 22px;
+        font-family: 'Teko', sans-serif;
+    }
+    .content {
+        padding: 0;
+        height: 100%;
+    }
+    .align {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .branding {
+        text-align: center;
+        margin: 0 0 40px;
+    }
+    .branding picture
+    .branding img {
+        width: 100%;
+        display: inline-block;
+        max-width: 300px;
+        margin: 0;
+    }
+    </style>
+
+{% endblock content %}

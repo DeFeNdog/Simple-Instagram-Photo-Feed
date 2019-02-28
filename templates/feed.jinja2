@@ -1,0 +1,133 @@
+{% extends 'base.jinja2' %}
+{% block subtitle %}inFocus Instagram Service{% endblock subtitle %}
+
+{% block content %}
+    <div class="media-feed">
+
+        {% set ns = namespace() %}
+        {% set ns.prev = 0 %}
+        {% set ns.add = 0 %}
+        {% set ns.next = 0 %}
+
+        {% if media %}
+            {% for m in media if not m.media_type == 'VIDEO' %}
+
+                {% if loop.index == 1 %}
+                    {% set ns.prev = 1 %}
+                    {% set ns.add = 7 %}
+                {% endif %}
+
+                <div class="media-item{{' media-item--width2' if loop.index == 1 or loop.index == ns.prev + ns.add  }}">
+
+                    <a href="{{m.media_url}}" data-lightbox="{{loop.index}}" data-title="{{m.caption | safe}}">
+                        <img src="{{m.media_url}}" alt="m.caption | safe" />
+                    </a>
+
+                    <div class="test-elements">
+                        <div>Index: {{loop.index}}</div>
+                        <div>Prev: {{ns.prev}}</div>
+                        <div>Add: {{ns.add}}</div>
+                        <div>Next: {{ns.next}} </div>
+                    </div>
+
+                </div>
+
+                {% if loop.index == ns.prev + ns.add %}
+                    {% set ns.prev = loop.index %}
+                    {% set ns.add = 3 if ns.add == 7 else 7 %}
+                    {% set ns.next = loop.index + ns.add %}
+                {% endif %}
+
+            {% endfor %}
+
+        {% endif %}
+
+    </div>
+
+    <style>
+
+        * { box-sizing: border-box; }
+
+        .media-feed:after {
+            content: '';
+            display: block;
+            clear: both;
+        }
+        .test-elements {
+            display: none;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        .media-item {
+            float: left;
+            width: 25%;
+            height: auto;
+            border: 14px solid #fff;
+        }
+        .media-item a,
+        .media-item a:link,
+        .media-item a:active,
+        .media-item a:visited {
+            display: block;
+            width: 100%;
+        }
+        .media-item img {
+            width: 100%;
+        }
+        .media-item--width2 { width: 50%; }
+
+    </style>
+
+    <script src="https://unpkg.com/packery@2/dist/packery.pkgd.min.js"></script>
+    <script>
+        var elem = document.querySelector('.media-feed');
+        var pckry = new Packery( elem, {
+            itemSelector: '.media-item',
+            percentPosition: true,
+            transitionDuration: '0.2s',
+            stagger: 30,
+            resize: true
+        });
+    </script>
+
+    <link rel="stylesheet" href="static/styles/lightbox.min.css">
+    <script src="static/scripts/lightbox-plus-jquery.js"></script>
+
+    <script>
+    lightbox.option({
+      resizeDuration: 0,
+      fadeDuration: 0,
+      imageFadeDuration: 0,
+      wrapAround: true,
+      fitImagesInViewport: true
+    })
+    </script>
+
+    <style>
+    .lb-container {
+        position: relative;
+    }
+    .lightbox .lb-image {
+        display: block;
+        height: auto;
+        max-width: inherit;
+        max-height: none;
+        border-radius: 0;
+        border: 20px solid #fff;
+    }
+    .custom-close {
+        position: absolute;
+        top: 0;
+        right: 0;
+        z-index: 11;
+        padding: 15px;
+        background-color: #fff;
+    }
+    .lb-closeContainer .lb-close {
+        display: none;
+    }
+
+    </style>
+
+{% endblock content %}
