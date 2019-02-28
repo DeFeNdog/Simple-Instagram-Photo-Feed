@@ -6,6 +6,7 @@ from flask import Flask, render_template, Response, request, redirect, url_for, 
 # pp = pprint.PrettyPrinter(indent=4)
 
 app = Flask(__name__)
+app.access_token = os.environ['ACCESS_TOKEN']
 
 
 @app.route('/')
