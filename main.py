@@ -27,10 +27,9 @@ def index():
 
 
 def get_media(account_id):
-    access_token = app.access_token
     endpoint = 'https://graph.facebook.com/v3.2'
     payload = {
-        'access_token': access_token,
+        'access_token': app.access_token,
         'fields': 'id,media_type,media_url,timestamp,permalink,caption'
     }
     resp = requests.get('{}/{}/media'.format(endpoint, account_id),
@@ -50,5 +49,4 @@ def media():
 
 
 if __name__ == "__main__":
-    port = int(os.environ.get("port", 6787))
-    app.run(host='0.0.0.0', port=port)
+    app.run()
