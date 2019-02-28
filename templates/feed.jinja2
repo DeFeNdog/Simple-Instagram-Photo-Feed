@@ -2,7 +2,7 @@
 {% block subtitle %}inFocus Instagram Service{% endblock subtitle %}
 
 {% block content %}
-    <div class="media-feed">
+    <div class="media-feed" id="feed">
 
         {% set ns = namespace() %}
         {% set ns.prev = 0 %}
@@ -48,6 +48,13 @@
 
         * { box-sizing: border-box; }
 
+        .media-feed {
+            opacity: 0;
+            transition: opacity .3s ease;
+        }
+        .media-feed.loaded {
+            opacity: 1;
+        }
         .media-feed:after {
             content: '';
             display: block;
@@ -79,16 +86,23 @@
 
     </style>
 
+    <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
     <script src="https://unpkg.com/packery@2/dist/packery.pkgd.min.js"></script>
     <script>
-        var elem = document.querySelector('.media-feed');
-        var pckry = new Packery( elem, {
-            itemSelector: '.media-item',
-            percentPosition: true,
-            transitionDuration: '0.2s',
-            stagger: 30,
-            resize: true
+
+        imagesLoaded( document.querySelector('#feed'), function( instance ) {
+            var elem = document.querySelector('.media-feed');
+            var pckry = new Packery( elem, {
+                itemSelector: '.media-item',
+                percentPosition: true,
+                transitionDuration: '0.2s',
+                stagger: 30,
+                resize: true
+            });
+            element = document.getElementById("feed");
+            element.className += " loaded";
         });
+
     </script>
 
     <link rel="stylesheet" href="static/styles/lightbox.min.css">
