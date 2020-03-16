@@ -6,5 +6,5 @@ This app was created as a simple proof of concept for a customer. The app uses F
 Python, Flask, Babel, Gunicorn, Lightbox2, npm, Webpack
 
 
-![Example of App in use](https://github.com/DeFeNdog/Simple-Instagram-Photo-Feed/blob/master/instagram_feed_exampe.jpg)
+![Example of App in use](https://github.com/DeFeNdog/Simple-Instagram-Photo-Feed/blob/master/instagram_feed_example.jpg)
 
