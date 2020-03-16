@@ -2,28 +2,14 @@ import os
 import requests
 from flask import Flask, render_template, Response, request, redirect, url_for, session
 
-# import pprint
-# pp = pprint.PrettyPrinter(indent=4)
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder="templates")
 app.access_token = os.environ['ACCESS_TOKEN']
 
 
 @app.route('/')
 def index():
     return render_template('index.jinja2')
-
-
-# def get_app_access_token():
-#     endpoint = 'https://graph.facebook.com/oauth/access_token'
-#     payload = {
-#         'client_id': app.app_id,
-#         'client_secret': app.app_secret,
-#         'grant_type': 'client_credentials'
-#     }
-#     r = requests.get(endpoint, params=payload)
-#     r = r.json()
-#     return r['access_token']
 
 
 def get_media(account_id):
@@ -41,7 +27,7 @@ def get_media(account_id):
 @app.route('/media')
 def media():
     media = False
-    account_id = '17841400463092183'  # Polachecks
+    account_id = ''  # Your Account ID
     if account_id:
         media = get_media(account_id)
 
